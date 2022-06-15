@@ -14,7 +14,7 @@ const isValid = (s) => {
         }
     }
 
-    //同じ鍵括弧で閉じられているか判別
+    //開き括弧と閉じ括弧の種類が一致しているか判別
     let Sum = s_Number.reduce((a,b)=>{
         return a + b;
     })
