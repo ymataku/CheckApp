@@ -1,57 +1,42 @@
 const isValid = (s) => {
-    let tmp = 0;
-    let tmp_back = 0;
-    let tmp2 = 0;
-    let tmp2_back = 0;
-    let tmp3 = 0;
-    let tmp3_back = 0;
-    let r = true;
+    let purification = []
     for(let i in s){
         if(s[i] == '('){
-            tmp = 1;
-
+            purification.push(1)
         }else if(s[i] == ')'){
-            if(tmp == 1){
-                tmp_back = 1;
-                if(tmp2_back == 1 || tmp3_back ==1){
-                    r = false;
-                }
-            }   
-        }
-        if(s[i] == '{'){
-            tmp2 = 1;
-
-        }else if(s[i] == '}'){
-            if(tmp2 == 1){
-                tmp2 = 0;
-                if(tmp == 1 || tmp3 ==1){
-                    r = false;
-                }
-                
-            }   
-        }
-        if(s[i] == '['){
-            tmp3 = 1;
-
+            purification.push(-1)
+        }else if(s[i] == '['){
+            purification.push(2)
         }else if(s[i] == ']'){
-            if(tmp3 == 1){
-                tmp3 = 0;
-                if(tmp == 1 || tmp2 ==1){
-                    r = false;
-                }
-            }   
+            purification.push(-2)
+        }else if(s[i] == '{'){
+            purification.push(3)
+        }else if( s[i] == '}'){
+            purification.push(-3)
         }
     }
-    return r
+    for(let i=0;i<s.length/2;i++){
+        if(i%2 == purification.lastIndexOf(-purification[i])%2){
+            return false
+        }
+    }
+    // console.log(String.fromCharCode('('.charCodeAt(0) + 1))
+    console.log(')'.charCodeAt(0))
+
+
+    return true
     };
     
-    let s = '({})';
-    console.log(isValid(s)); // true
+    let s="()";
+    console.log(isValid(s)); 
     
-    s = '({)}'
-    console.log(isValid(s)); // false
-
     s="([]){}"
+    console.log(isValid(s)); 
+    s="([]){}"
+    console.log(isValid(s)); 
+
+    s="({{)}}"
     console.log(isValid(s))
+     
 
     
